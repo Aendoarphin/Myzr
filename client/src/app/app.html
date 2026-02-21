@@ -1,0 +1,42 @@
+<div class="inline-flex min-h-screen">
+  <div class="inline-flex">
+    <aside
+      [class.w-30]="isSidebarOpen()"
+      class="bg-background text-background opacity-100 flex flex-col overflow-hidden w-0 transition-all duration-300 *:font-semibold capitalize border-r border-r-primary"
+    >
+      <div id="brand-container">
+        <h1 class="font-bold tracking-wide text-white bg-primary p-4">Myzr</h1>
+      </div>
+      @for (route of routes; track route.name) {
+        <a
+          [routerLink]="route.path"
+          routerLinkActive="border-r-4 border-primary bg-primary/10"
+          class="flex items-center text-foreground transition-colors duration-300 ease-in-out px-3 py-1 border-b border-b-primary/50 last:border-b-0 hover:bg-primary/10"
+        >
+          {{ route.name }}
+        </a>
+      }
+    </aside>
+    
+    <ng-icon
+      name="tablerLayoutSidebar"
+      (click)="toggleSidebar()"
+      size="30"
+      class="opacity-50 hover:opacity-100 transition-opacity cursor-pointer"
+      color="var(--color-primary)"
+    />
+  </div>
+  
+  <router-outlet />
+
+  <div class="fixed bottom-0 right-0 p-1 bg-black/50 text-white text-xs rounded-tl">
+    <label for="ui-debug-borders">Borders</label>
+    <input 
+      id="ui-debug-borders" 
+      type="checkbox" 
+      [checked]="isDebugMode()"
+      (change)="toggleDebugBorders()" 
+      class="ml-2" 
+    />
+  </div>
+</div>
